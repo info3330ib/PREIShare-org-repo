@@ -18,17 +18,25 @@ for a new teammate without touching product runtime code.
 - Kept the change scoped to documentation only (no app, package, or config runtime edits).
 - Followed the plan in `docs/onboarding/first-contribution-plan.md` and implementation notes in
   `docs/onboarding/first-contribution-notes.md`.
+- History includes one edit-then-revert pair on `first-contribution-plan.md`: a checkbox-only
+  edit was made, then reverted once we agreed it fell outside the plan's approved scope. The
+  final diff reflects the corrected, in-scope state.
 
 ## What reviewers should look at
 - [ ] `CONTRIBUTORS.md` — new entry is accurate, formatted like neighbors, and free of secrets
+- [ ] `docs/onboarding/first-contribution-plan.md` — the plan that scoped this change
+- [ ] `docs/onboarding/first-contribution-notes.md` — implementation notes and agent-cycle log
+- [ ] `docs/onboarding/pr-description.md` — this file, the local record of the PR write-up
 - [ ] Diff contains only intended files (no accidental `.env`, build output, or editor junk)
 - [ ] Commit message explains *why* this onboarding change exists
 
 ## Test plan
-1. Open the Files changed tab and confirm only the expected path(s) appear.
+1. Open the Files changed tab and confirm only the four expected paths appear.
 2. Skim `CONTRIBUTORS.md` in the PR diff: name/link/role lines render as valid Markdown.
 3. Search the diff for tokens, passwords, or local absolute paths — expect none.
-4. (Optional) Check out the branch locally and open `CONTRIBUTORS.md` in a Markdown preview.
+4. Skim `first-contribution-plan.md` and `first-contribution-notes.md`: confirm they render as
+   valid Markdown and match what this description claims.
+5. (Optional) Check out the branch locally and open `CONTRIBUTORS.md` in a Markdown preview.
 
 ## Screenshots / notes
 No UI screenshots (docs-only change).  
