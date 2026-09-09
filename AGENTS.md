@@ -11,6 +11,17 @@ Before editing files for a substantial task:
 
 # Project context
 
+## Agent rules
+Agent-facing rules (stack constraints, safe/unsafe edit surfaces, secrets policy, workflow expectations) live in [.cursor/rules/preishare.mdc](.cursor/rules/preishare.mdc). This file is the human-readable companion — keep both in sync when either changes.
+
+## What PREIshare is
+PREIshare is a real-estate intelligence product: it takes real-estate data from many sources — property details, market trends, sales — to help people make informed buying/selling decisions (per `docs/onboarding/team-orientation-notes.md` §1). It is a single package, not a monorepo (`docs/onboarding/repo-map.md` §1).
+
+## Onboarding docs
+- [docs/onboarding/repo-map.md](docs/onboarding/repo-map.md) — verified inventory of the repo, plus safe-first-touch vs. do-not-edit-yet lists
+- [docs/onboarding/setup-log.md](docs/onboarding/setup-log.md) — fork/clone/remote setup record
+- [docs/onboarding/team-orientation-notes.md](docs/onboarding/team-orientation-notes.md) — product mission and PR-workflow expectations
+
 ## Scaffold commands
 
 Exact CLI used (initially created a nested folder, then merged into this repo root):
@@ -42,7 +53,9 @@ Result: 9 intent-enabled packages, 31 skills (Start, Router, Devtools, Virtual F
 | Styling | Tailwind CSS v4 (`@tailwindcss/vite`) |
 | Toolchain | Vite 8 + TypeScript (default CLI toolchain) |
 | Router | TanStack Router file-based routes (`src/routes`) |
+| Path aliases | `#/*` and `@/*` both → `src/*` (see `tsconfig.json`) |
 | Integrations / add-ons | None |
+| Backend/data (planned, not yet present) | Supabase, PostgreSQL, pgvector — no `supabase/` folder, client file, or SQL/migrations exist yet; confirm with a human before treating as implemented (see `docs/onboarding/repo-map.md` §4) |
 
 ## Layout (preserve unless there is a clear reason to change)
 
@@ -55,6 +68,13 @@ Result: 9 intent-enabled packages, 31 skills (Start, Router, Devtools, Virtual F
 - `.cta.json` — scaffold metadata
 
 Package name in `package.json` is `preishare-org-repo` (repo root). App lives at the repository root, not under `my-tanstack-app/`.
+
+## Safety boundaries (restated from `.cursor/rules/preishare.mdc` — keep both in sync)
+
+- **Safe first surfaces:** `docs/`, `README.md`, small clearly scoped UI copy already identified as safe — see `docs/onboarding/repo-map.md` §6 for the current, verified list. Don't invent paths not listed there.
+- **Avoid unless explicitly tasked:** auth, billing, database migrations, CI secrets, large dependency upgrades, and any do-not-edit-yet config/build files (`package.json`, `tsconfig.json`, `tsr.config.json`, `vite.config.ts`, `.vscode/settings.json`, `.cursor/rules/preishare.mdc`, this file).
+- **Secrets:** never commit `.env`, API keys, tokens, or connection strings (`.env` is gitignored). Never print secrets into docs, rules, or chat logs. Document configuration by variable *name* only (e.g. `SUPABASE_URL`), never a real value.
+- **Diffs:** prefer the smallest diff that completes the task; no drive-by refactors; no new libraries without explicit human sign-off.
 
 ## Environment variables
 
@@ -75,6 +95,15 @@ npm run build
 npm run preview
 npm run generate-routes
 ```
+
+No `test` script is defined yet (open question logged in `docs/onboarding/repo-map.md` §7).
+
+## Contribution workflow (PR)
+
+Per `docs/onboarding/team-orientation-notes.md` §0/§4 and `docs/onboarding/setup-log.md`:
+- Contribute by forking the repo and opening pull requests from the fork — never push directly to the team repo's default branch.
+- Work on a small, scoped feature branch; describe why the change exists and how a reviewer can verify it.
+- Treat failing automated checks as blockers once CI exists (none is configured yet — see `docs/onboarding/repo-map.md` §5).
 
 ## Deployment notes
 
