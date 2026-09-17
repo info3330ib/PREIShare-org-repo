@@ -7,7 +7,7 @@
 
 ## 1. Stakeholder summary (plain language)
 
-I completed PREIshare engineering onboarding for Sprint 1 (dev environment and AI tooling). I forked the team repository, cloned my fork, wired up origin and upstream, verified my local toolchain, configured Cursor-style project rules and agent memory, mapped the repo to choose a safe first contribution, and opened a small cross-fork pull request that follows the team's Git and review habits. I also ran a simulated review cycle on that PR and verified the fixes against the real diff rather than trusting a polished-sounding draft.
+I completed PREIshare engineering onboarding for Sprint 1 (dev environment and AI tooling). I forked the team repository, cloned my fork, wired up origin and upstream, verified my local toolchain, configured Cursor-style project rules and agent memory, mapped the repo to choose a safe first contribution, and opened a small cross-fork pull request that follows the team's Git and review habits. I also ran a simulated review cycle on that PR and verified the fixes against the real diff rather than trusting the AI draft.
 
 **Definition of done met:**
 - [X] Fork created, local clone of my fork, both remotes and toolchain verified (see setup log)
