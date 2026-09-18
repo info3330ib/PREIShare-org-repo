@@ -1,7 +1,10 @@
+import type { ListingStatus } from './listing-status'
+import type { PropertyType } from './property-type'
+
 /**
- * Core PREIshare investor listing — scalar fields only.
- * Nested types (address, financials, contacts) and unions
- * (status, property type) are added in later steps.
+ * Core PREIshare investor listing — scalar fields plus the two
+ * controlled-vocabulary fields (status, property type). Nested
+ * types (address, financials, contacts) are added in later steps.
  */
 export interface InvestorListing {
   /** Stable unique id for this listing (assigned by the system). */
@@ -12,6 +15,12 @@ export interface InvestorListing {
 
   /** Longer plain-text description of the investment opportunity. */
   summary: string
+
+  /** Where this listing currently sits in its lifecycle. */
+  status: ListingStatus
+
+  /** The asset class this property belongs to. */
+  propertyType: PropertyType
 
   /**
    * Asking price in whole US dollars (no currency symbol).
