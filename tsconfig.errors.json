@@ -1,0 +1,13 @@
+/*
+ * Checks ONLY the intentional-error fixtures.
+ * Run with: npm run typecheck:errors
+ *
+ * This command is EXPECTED to report errors and exit non-zero. That is the
+ * proof that the types reject bad data. The errors it prints should match
+ * docs/type-safety/expected-type-errors.md.
+ */
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/fixtures/invalid-listings.errors.ts"],
+  "exclude": []
+}

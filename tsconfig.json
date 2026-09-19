@@ -1,5 +1,19 @@
 {
   "include": ["**/*.ts", "**/*.tsx"],
+  /*
+   * `invalid-listings.errors.ts` is SUPPOSED to fail typechecking, so it is kept
+   * out of the clean gate. Check it on purpose with: npm run typecheck:errors
+   * See docs/type-safety/expected-type-errors.md.
+   * Note: specifying `exclude` replaces TypeScript's default, so build output
+   * directories are listed explicitly here.
+   */
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".output",
+    ".nitro",
+    "src/fixtures/invalid-listings.errors.ts"
+  ],
   "compilerOptions": {
     "target": "ES2022",
     "jsx": "react-jsx",

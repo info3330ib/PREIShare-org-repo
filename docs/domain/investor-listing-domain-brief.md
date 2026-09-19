@@ -33,6 +33,10 @@ These are the failure modes this brief exists to prevent:
 
 No other status value is permitted. A new status requires updating this brief first.
 
+A `sold` listing must also record **when** it closed (`closedAt`). A listing in
+any other status must not carry a close date, or reports would count an open
+listing as a completed deal.
+
 ## Nested data groups
 - **Address** — street line(s), city, region/state, postal code, country.
 - **Financial summary** — asking price, currency, optional projected return metrics the team agrees to track.

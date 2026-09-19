@@ -17,6 +17,7 @@ Companion document: `docs/domain/investor-listing-domain-brief.md` (actors, goal
 | isFeatured | Whether the listing is promoted on the browse page | yes/no | no | `true` |
 | createdAt | When the listing record was created | text (timestamp; exact format decided in the types step) | yes | `2026-03-01T10:00:00Z` |
 | updatedAt | Last meaningful edit | text (timestamp; exact format decided in the types step) | yes | `2026-03-15T16:30:00Z` |
+| closedAt | When the deal closed | text (timestamp) | only when status is `sold`; must not be set otherwise | `2026-08-29T17:00:00Z` |
 
 ## Address (nested object)
 | Field | Meaning | Shape | Required? | Example |
@@ -32,7 +33,7 @@ Companion document: `docs/domain/investor-listing-domain-brief.md` (actors, goal
 | Field | Meaning | Shape | Required? | Example |
 | --- | --- | --- | --- | --- |
 | financials.askingPrice | Listed price amount | number | yes | `12500000` |
-| financials.currency | Currency the price is stated in | fixed choice (agreed supported currency codes) | yes | `USD`, `CAD`, `EUR`, `GBP` |
+| financials.currency | Currency the price is stated in | fixed choice; the agreed set is exactly `USD`, `CAD`, `EUR`, `GBP` | yes | `USD` |
 | financials.projectedIrrPercent | Optional projected internal rate of return | number | no | `12.5` |
 | financials.capRatePercent | Optional cap rate | number | no | `5.8` |
 
@@ -41,6 +42,8 @@ At least one contact is required for any listing that is `published`, `under_off
 
 | Field | Meaning | Shape | Required? | Example |
 | --- | --- | --- | --- | --- |
+| primaryContactId | Which contact is the main point of contact for the listing. Must match a `contacts[].id` on the same listing. | text | yes | `ct_1101` |
+| contacts[].id | Stable id for this contact within the listing, so ownership rows and `primaryContactId` can reference it | text | yes (each contact) | `ct_1101` |
 | contacts[].name | Person or firm name | text | yes (each contact) | `Jordan Lee` |
 | contacts[].role | Why they appear on the listing | fixed choice | yes (each contact) | `broker`, `owner_rep`, `asset_manager`, `investor_relations` |
 | contacts[].email | Email if used | text | at least one of email/phone required per contact | `jordan@example.com` |

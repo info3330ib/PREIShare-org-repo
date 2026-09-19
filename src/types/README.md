@@ -19,7 +19,7 @@ those mistakes at **compile time**, before users see them.
 - No UI components, no API route handlers, no database clients. Those live
   elsewhere in `src/`.
 
-## How to check types
+## Typecheck
 
 From the project root:
 
@@ -28,8 +28,32 @@ npm install
 npm run typecheck
 ```
 
-That runs `tsc --noEmit`: TypeScript checks the project and reports errors
-without writing any JavaScript output files.
+**What success looks like:** the command finishes and prints nothing, with exit
+code 0. No news is good news.
+
+Notes for beginners:
+
+- `tsc --noEmit` means "check types only; do not write compiled JavaScript files."
+- This is the team's pre-review gate. Run it before asking for review.
+- Valid sources include everything under `src/types/**` and
+  `src/fixtures/sample-investor-listings.ts`. All of it must pass.
+
+### The intentional error file
+
+`src/fixtures/invalid-listings.errors.ts` is **supposed to fail.** Each export in
+it breaks one rule on purpose, to prove the types actually reject bad data.
+
+It is excluded from the clean gate in `tsconfig.json`, so it will never make
+`npm run typecheck` go red. To check it deliberately:
+
+```bash
+npm run typecheck:errors
+```
+
+That command is **expected to print errors and exit non-zero.** That is the pass
+condition, not a failure. The errors it prints should match the table in
+`docs/type-safety/expected-type-errors.md`. If an expected error stops appearing,
+a type got looser and something needs fixing.
 
 ## Strict mode (plain language)
 
