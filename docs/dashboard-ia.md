@@ -92,10 +92,13 @@ src/routes/
   _site/
     index.tsx       moved from routes/index.tsx   (URL stays /)
     about.tsx       moved from routes/about.tsx   (URL stays /about)
+  dashboard.tsx     dashboard layout, renders AppShell (with an <Outlet />)
   dashboard/
-    route.tsx       dashboard layout, renders AppShell
     index.tsx  portfolio.tsx  deals.tsx  profile.tsx
 ```
+
+`dashboard.tsx` beside the `dashboard/` folder is equivalent to `dashboard/route.tsx`
+inside it. The flat form was chosen when the routes were built.
 
 **Rejected alternative:** checking the URL inside `__root.tsx` ("skip the header
 if the path starts with `/dashboard`"). It works, but it is string matching that
