@@ -1,14 +1,12 @@
 import { Outlet, createFileRoute } from '@tanstack/react-router'
+import { AppShell } from '../components/layout/AppShell'
 
 /**
  * Parent layout route for every /dashboard/* page.
  *
- * Child routes in src/routes/dashboard/ render where <Outlet /> sits. Without the
- * Outlet, the child URLs would still match but nothing would appear on screen.
- *
- * Placeholder only: AppShell (sidebar, header, main region) replaces this in a
- * later step, per docs/component-plan.md. No <main> here; each child page owns
- * its own <main> landmark.
+ * Child routes in src/routes/dashboard/ render where <Outlet /> sits, inside
+ * AppShell's main region. Without the Outlet, the child URLs would still
+ * match but nothing would appear on screen.
  */
 export const Route = createFileRoute('/dashboard')({
   component: DashboardLayout,
@@ -16,9 +14,8 @@ export const Route = createFileRoute('/dashboard')({
 
 function DashboardLayout() {
   return (
-    <div data-area="dashboard-layout">
-      <p>PREIshare investor dashboard (layout placeholder; the shell comes next)</p>
+    <AppShell>
       <Outlet />
-    </div>
+    </AppShell>
   )
 }
