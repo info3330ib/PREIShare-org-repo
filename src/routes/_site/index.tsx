@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute('/_site/')({ component: App })
 
 function App() {
   return (
@@ -76,7 +76,7 @@ function App() {
         <p className="island-kicker mb-2">Quick Start</p>
         <ul className="m-0 list-disc space-y-2 pl-5 text-sm text-[var(--sea-ink-soft)]">
           <li>
-            Edit <code>src/routes/index.tsx</code> to customize the home page.
+            Edit <code>src/routes/_site/index.tsx</code> to customize the home page.
           </li>
           <li>
             Update <code>src/components/Header.tsx</code> and{' '}
