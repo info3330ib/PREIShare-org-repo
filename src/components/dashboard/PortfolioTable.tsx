@@ -50,8 +50,14 @@ export function PortfolioTable({
         <p className="m-0 mt-3 text-sm text-[var(--sea-ink-soft)]">{emptyMessage}</p>
       ) : (
         // Scrolls inside its own box on narrow screens, so the page itself
-        // never scrolls sideways (a brief success criterion).
-        <div className="mt-3 overflow-x-auto">
+        // never scrolls sideways (a brief success criterion). Focusable so
+        // keyboard users can scroll it.
+        <div
+          className="dash-table-wrap mt-3"
+          role="region"
+          aria-label="Holdings table, scrollable"
+          tabIndex={0}
+        >
           <table aria-labelledby={headingId} className="w-full border-collapse text-sm">
             <thead>
               <tr className="text-left text-[var(--sea-ink-soft)]">

@@ -1,0 +1,175 @@
+/*
+  Shared responsive and accessibility rules for the investor dashboard shell.
+  Loaded from src/styles.css, the same global entry the root route links.
+
+  Breakpoints (media queries cannot read CSS variables, so they repeat here):
+    below 768px    sidebar stacks above the content; menu button toggles the links
+    768px and up   sidebar is a persistent left column
+    640px / 1024px card grid goes 1 -> 2 -> 3 columns
+  The sidebar only takes width from 768px, so 3 columns at 1024px leaves each
+  card about 240px.
+
+  Class names match the real markup in src/components/layout/ and the home page.
+*/
+
+:root {
+  --dash-sidebar-width: 16rem;
+  --dash-gap: 1rem;
+  --dash-touch-min: 44px;
+  --dash-focus: var(--lagoon-deep);
+}
+
+/* Shell layout */
+
+.app-shell {
+  display: flex;
+  width: 100%;
+}
+
+.dashboard-sidebar {
+  width: var(--dash-sidebar-width);
+  flex-shrink: 0;
+  padding: 1rem 0.75rem;
+  border-right: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.sidebar-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.sidebar-brand {
+  padding: 0.5rem 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--sea-ink);
+}
+
+.sidebar-nav-region {
+  margin-top: 0.5rem;
+}
+
+.sidebar-toggle {
+  display: none;
+  align-items: center;
+  min-height: var(--dash-touch-min);
+  min-width: var(--dash-touch-min);
+  padding: 0 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  background: var(--surface-strong);
+  color: var(--sea-ink);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.app-shell-main-column {
+  flex: 1;
+  min-width: 0; /* lets a wide table scroll inside its box instead of widening the page */
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--header-bg);
+}
+
+.header-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--sea-ink);
+}
+
+.app-shell-content {
+  flex: 1;
+  padding: var(--dash-gap);
+}
+
+@media (min-width: 768px) {
+  .dashboard-header,
+  .app-shell-content {
+    padding: 1.5rem;
+  }
+}
+
+/* Phone: stack the sidebar above the content, links behind the menu button */
+
+@media (max-width: 767px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .dashboard-sidebar {
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sidebar-toggle {
+    display: inline-flex;
+  }
+
+  /* display:none, not a zero max-height, so closed links leave the tab order. */
+  .dashboard-sidebar[data-open="false"] .sidebar-nav-region {
+    display: none;
+  }
+}
+
+/* Card grid: 1 column on phones, 2 from 640px, 3 from 1024px */
+
+.dash-card-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--dash-gap);
+}
+
+@media (min-width: 640px) {
+  .dash-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .dash-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Wide tables scroll inside their own box, so the page never scrolls sideways */
+
+.dash-table-wrap {
+  overflow-x: auto;
+}
+
+.dash-table-wrap > table {
+  min-width: 30rem;
+}
+
+/* Touch targets */
+
+.dashboard-nav a {
+  display: flex;
+  align-items: center;
+  min-height: var(--dash-touch-min);
+}
+
+/* Keyboard focus */
+
+.app-shell :is(a, button, [tabindex="0"]):focus-visible {
+  outline: 2px solid var(--dash-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell * {
+    transition: none !important;
+  }
+}

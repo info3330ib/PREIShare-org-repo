@@ -37,7 +37,7 @@ function DashboardHomePage() {
 
   return (
     <div className="grid gap-4">
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="dash-card-grid">
         <StatsCard
           label="Total portfolio value"
           value={formatMoney(totalValue, 'USD')}

@@ -21,7 +21,7 @@ export function NavItems() {
   const pathname = useRouterState({ select: (state) => state.location.pathname })
 
   return (
-    <nav aria-label="Dashboard">
+    <nav aria-label="Dashboard" className="dashboard-nav">
       <ul className="m-0 list-none p-0">
         {dashboardNavItems.map((item) => {
           const isActive = isNavItemActive(item, pathname)
