@@ -7,39 +7,12 @@ import type { RecentActivityItem } from '../../components/dashboard/RecentActivi
 import { MOCK_ACTIVITY, MOCK_HOLDINGS } from '../../fixtures/dashboard-mock'
 import { sampleInvestorListings } from '../../fixtures/sample-investor-listings'
 import { isOpenDeal } from '../../lib/deals'
+import { formatDate, formatMoney } from '../../lib/format'
+import { PROPERTY_TYPE_LABELS } from '../../lib/labels'
 import type { PropertyType } from '../../types'
 
 export const Route = createFileRoute('/dashboard/')({
   component: DashboardHomePage,
-})
-
-/**
- * Investor-facing names for each property type. Typed as a full Record, so
- * adding a value to PropertyType fails typecheck here until it gets a label.
- */
-const PROPERTY_TYPE_LABELS: Record<PropertyType, string> = {
-  multifamily: 'Multifamily',
-  office: 'Office',
-  retail: 'Retail',
-  industrial: 'Industrial',
-  mixed_use: 'Mixed use',
-  land: 'Land',
-}
-
-const usd = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  maximumFractionDigits: 0,
-})
-
-// timeZone UTC: the mock dates are date-only ISO strings, which parse as UTC.
-// Formatting them in local time would show the previous day west of UTC, and
-// would differ between the server render and the browser.
-const shortDate = new Intl.DateTimeFormat('en-US', {
-  month: 'short',
-  day: 'numeric',
-  year: 'numeric',
-  timeZone: 'UTC',
 })
 
 function DashboardHomePage() {
@@ -59,7 +32,7 @@ function DashboardHomePage() {
 
   const activityItems: RecentActivityItem[] = MOCK_ACTIVITY.map((item) => ({
     ...item,
-    dateLabel: shortDate.format(new Date(item.date)),
+    dateLabel: formatDate(item.date),
   }))
 
   return (
@@ -67,7 +40,7 @@ function DashboardHomePage() {
       <div className="grid gap-4 sm:grid-cols-3">
         <StatsCard
           label="Total portfolio value"
-          value={usd.format(totalValue)}
+          value={formatMoney(totalValue, 'USD')}
           hint="Your share across all holdings"
         />
         <StatsCard

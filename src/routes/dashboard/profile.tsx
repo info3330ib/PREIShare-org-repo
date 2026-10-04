@@ -1,4 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { ProfileCard } from '../../components/dashboard/ProfileCard'
+import { MOCK_PROFILE } from '../../fixtures/dashboard-mock'
+import { formatDate } from '../../lib/format'
 
 export const Route = createFileRoute('/dashboard/profile')({
   component: ProfilePage,
@@ -6,10 +9,11 @@ export const Route = createFileRoute('/dashboard/profile')({
 
 function ProfilePage() {
   return (
-    <>
-      <p>
-        Placeholder. Will show mock name, email, phone, and investor-since date.
-      </p>
-    </>
+    <ProfileCard
+      profile={{
+        ...MOCK_PROFILE,
+        investorSinceLabel: formatDate(MOCK_PROFILE.investorSince),
+      }}
+    />
   )
 }

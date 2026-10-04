@@ -31,6 +31,26 @@ export const MOCK_HOLDINGS: readonly MockHolding[] = [
   { id: 'h4', propertyName: 'Trinity Logistics Hub', propertyType: 'industrial', value: 120000, sharePercent: 6 },
 ]
 
+/**
+ * The signed-in investor's own details. Fields are exactly the brief's:
+ * name, email, phone, and investor-since date. Contact details are
+ * fictional (example.com domain, 555 phone exchange).
+ */
+export type MockInvestorProfile = {
+  readonly fullName: string
+  readonly email: string
+  readonly phone: string
+  /** ISO date the investor joined. */
+  readonly investorSince: string
+}
+
+export const MOCK_PROFILE: MockInvestorProfile = {
+  fullName: 'Morgan Ellis',
+  email: 'morgan.ellis@example.com',
+  phone: '+1-512-555-0199',
+  investorSince: '2024-03-12',
+}
+
 /** One recent event on the investor's account. */
 export type MockActivityItem = {
   readonly id: string
