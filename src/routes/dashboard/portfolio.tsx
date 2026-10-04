@@ -10,7 +10,7 @@ export const Route = createFileRoute('/dashboard/portfolio')({
 })
 
 function PortfolioPage() {
-  // Same MOCK_HOLDINGS as the home page, so its count and total match these rows.
+  // Shares MOCK_HOLDINGS with the home page, so its count and total match these rows.
   const rows: PortfolioTableRow[] = MOCK_HOLDINGS.map((holding) => ({
     id: holding.id,
     propertyName: holding.propertyName,

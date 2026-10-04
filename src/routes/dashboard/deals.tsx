@@ -8,8 +8,7 @@ export const Route = createFileRoute('/dashboard/deals')({
 })
 
 function DealsPage() {
-  // The page decides what "open" means, using the same rule as the home
-  // page's "Open deals" stat card, so the two numbers always match.
+  // The page decides what "open" means, with the same rule as the home stat card.
   const openDeals = sampleInvestorListings.filter(isOpenDeal)
 
   return <DealsList listings={openDeals} />

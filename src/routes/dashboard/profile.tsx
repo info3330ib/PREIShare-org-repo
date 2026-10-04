@@ -8,6 +8,7 @@ export const Route = createFileRoute('/dashboard/profile')({
 })
 
 function ProfilePage() {
+  // The page formats the date label; ProfileCard only displays it.
   const profile = {
     ...MOCK_PROFILE,
     investorSinceLabel: formatDate(MOCK_PROFILE.investorSince),
