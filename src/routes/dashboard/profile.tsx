@@ -8,12 +8,10 @@ export const Route = createFileRoute('/dashboard/profile')({
 })
 
 function ProfilePage() {
-  return (
-    <ProfileCard
-      profile={{
-        ...MOCK_PROFILE,
-        investorSinceLabel: formatDate(MOCK_PROFILE.investorSince),
-      }}
-    />
-  )
+  const profile = {
+    ...MOCK_PROFILE,
+    investorSinceLabel: formatDate(MOCK_PROFILE.investorSince),
+  }
+
+  return <ProfileCard profile={profile} />
 }
