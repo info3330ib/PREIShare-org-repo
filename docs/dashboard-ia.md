@@ -72,14 +72,42 @@ Child routes: index (home), `portfolio`, `deals`, `profile`.
 The parent must not use an `_authed` segment or any auth guard. Pages are public
 this sprint.
 
-### Open question: the starter app's root chrome
+### Decision: dashboard pages show only the dashboard chrome
 
-`src/routes/__root.tsx` currently wraps **every** route, including future
-`/dashboard/*` routes, in the starter app's `Header` and `Footer`. Unless that
-changes, dashboard pages will render the starter header *and* the dashboard header.
+**Decided 2026-10-03.** `/dashboard/*` pages render `AppShell` only, with no starter
+`Header` or `Footer`. This follows the common pattern of separating a public site
+layout from an app layout, and keeps a single navigation on screen, as the brief's
+success criteria require.
 
-Decide before the routing step, for example:
-- leave the starter chrome and accept a two-header look for now, or
-- render the starter `Header`/`Footer` only outside `/dashboard`.
+**Problem it solves:** `src/routes/__root.tsx` currently wraps every route in the
+starter `Header` and `Footer`, which would put two headers on dashboard pages.
 
-Either way, the existing `/` and `/about` pages stay working and untouched.
+**How:** use a TanStack Start pathless layout route (a route whose name starts
+with `_`, which groups pages without adding anything to the URL):
+
+```text
+src/routes/
+  __root.tsx        trimmed to <html>, <head>, <body>, and scripts only
+  _site.tsx         renders the starter Header + Footer around its children
+  _site/
+    index.tsx       moved from routes/index.tsx   (URL stays /)
+    about.tsx       moved from routes/about.tsx   (URL stays /about)
+  dashboard/
+    route.tsx       dashboard layout, renders AppShell
+    index.tsx  portfolio.tsx  deals.tsx  profile.tsx
+```
+
+**Rejected alternative:** checking the URL inside `__root.tsx` ("skip the header
+if the path starts with `/dashboard`"). It works, but it is string matching that
+has to be updated by hand whenever a new section is added.
+
+**Tradeoffs accepted:**
+- The starter `/` and `/about` files move into `_site/`. Their URLs and content do
+  not change, but their file locations do, so "untouched" here means unchanged in
+  behavior, not in location.
+- `ThemeToggle` lives in the starter `Header`, so dashboard pages will not have
+  one. The brief does not require it.
+
+**Acceptance for the routing step:** `/` and `/about` still show the starter header
+and footer; all four `/dashboard` pages show only the dashboard header and sidebar;
+`npm run typecheck` and `npm run build` both pass.
