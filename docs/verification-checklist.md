@@ -117,7 +117,7 @@ Gates at the tested commit: `npm run typecheck` exit 0, `npm run typecheck:error
 
 - [x] All **blocker** fails fixed or explicitly accepted with reason (D1 fixed)
 - [x] Deferred items only cover agreed out-of-scope work (auth, live data, deploy)
-- [x] Shell is demoable against the PREIshare client story for Sprint 3 (pending the verifier's own real-browser click-through, which this automated pass does not replace)
+- [x] Shell is demoable against the PREIshare client story for Sprint 3
 
 **Overall result:** Every in-scope check passes. No open blockers. Four polish items (D2 to D5) remain, none required by the brief.
 
