@@ -15,6 +15,12 @@ All dashboard components live in **`src/components/dashboard/`**, not directly i
 `src/routes/__root.tsx`. Putting the dashboard `Header` in its own folder keeps the
 locked component name without overwriting or shadowing the starter file.
 
+**As built:** the widgets and page-level components are in `src/components/dashboard/`,
+as planned. The layout components (`AppShell`, `Sidebar`, `Header`) and `navConfig.ts`
+ended up in `src/components/layout/` instead, next to a small helper, `NavItems.tsx`,
+that `Sidebar` uses to render the links. The dashboard `Header` still does not collide
+with the starter `src/components/Header.tsx`.
+
 ## Data rule: pages own data, components only display it
 
 Route page files hold or import the mock data and pass it to components as props.
